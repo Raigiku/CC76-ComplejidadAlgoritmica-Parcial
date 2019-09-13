@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Complejidad.Models;
 
 namespace Complejidad.Components
 {
@@ -43,17 +44,36 @@ namespace Complejidad.Components
                     area = new Rect(0, 0, width, height)
                 });
             }
-
-            CreateRectangles();
         }
 
-        private void CreateRectangles()
+        public void CreateRectangles()
         {
+            Node node = new Node();
+            node.Id = 0;
+            node.X = 0;
+            node.Y = 0;
+            node.Width = (int)gridTransform.localScale.x;
+            node.Height = (int)gridTransform.localScale.y;
+
             foreach (var rectangle in rectangles)
             {
+                print($"x:{rectangle.area.x}");
+                print($"y:{rectangle.area.y}");
+                rectangle.area.x -= rectangle.area.width / 2f;
+                rectangle.area.y -= rectangle.area.height / 2f;
+                node.Insert(rectangle);
+            }
+
+            foreach (var rectangle in rectangles)
+            {
+                transform.position = -gridTransform.localScale / 2f;
+                rectangle.area.x += rectangle.area.width / 2f;
+                rectangle.area.y += rectangle.area.height / 2f;
                 GameObject rectangleObject = Instantiate(rectanglePrefab, transform);
                 rectangleObject.transform.localScale = rectangle.area.size;
+                rectangleObject.transform.localPosition = rectangle.area.position;
                 rectangleObject.GetComponent<LetterComponent>().ChangeLetterText(rectangle.letter);
+                rectangleObject.GetComponent<SpriteRenderer>().color = Random.ColorHSV();
             }
         }
 
