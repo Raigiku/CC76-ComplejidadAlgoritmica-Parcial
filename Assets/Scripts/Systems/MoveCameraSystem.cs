@@ -1,30 +1,42 @@
 ﻿using UnityEngine;
+using Complejidad.Components;
+using UnityEngine.EventSystems;
 
 namespace Complejidad.Systems
 {
     public class MoveCameraSystem : MonoBehaviour
     {
-        private Camera camera;
+        private Camera cameraComponent;
+
+        private CameraSpeedComponent cameraSpeedComponent;
+
+        [SerializeField]
+        private Transform gridTransform;
 
         private void Awake()
         {
-            camera = GetComponent<Camera>();
+            cameraComponent = GetComponent<Camera>();
+            cameraSpeedComponent = GetComponent<CameraSpeedComponent>();
         }
 
         void Update()
         {
-            if (Input.GetMouseButton(0))
+            bool noUIcontrolsInUse = EventSystem.current.currentSelectedGameObject == null;
+            if (noUIcontrolsInUse)
             {
-                float speed = camera.orthographicSize / 4f;
-                transform.position += new Vector3(-Input.GetAxisRaw("Mouse X") * speed, -Input.GetAxisRaw("Mouse Y") * speed, 0f);
-            }
-            if (Input.mouseScrollDelta.y == -1f)
-            {
-                camera.orthographicSize += 1f;
-            }
-            else if (Input.mouseScrollDelta.y == 1f)
-            {
-                camera.orthographicSize -= 1f;
+                if (Input.GetMouseButton(0))
+                {
+                    float speed = cameraComponent.orthographicSize / 4f;
+                    transform.position += new Vector3(-Input.GetAxisRaw("Mouse X") * speed, -Input.GetAxisRaw("Mouse Y") * speed, 0f);
+                }
+                if (Input.mouseScrollDelta.y == -1f)
+                {
+                    cameraComponent.orthographicSize += cameraSpeedComponent.Speed;
+                }
+                else if (Input.mouseScrollDelta.y == 1f && cameraComponent.orthographicSize - cameraSpeedComponent.Speed > 0)
+                {
+                    cameraComponent.orthographicSize -= cameraSpeedComponent.Speed;
+                }
             }
         }
     }
