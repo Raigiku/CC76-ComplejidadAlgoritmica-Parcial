@@ -6,7 +6,7 @@ namespace Complejidad.Components
     public class CameraSpeedComponent : MonoBehaviour
     {
         [SerializeField]
-        private Slider speedSlider;
+        private Slider speedSlider = null;
 
         public float Speed { get; set; }
 

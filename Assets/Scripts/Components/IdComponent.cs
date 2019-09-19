@@ -6,7 +6,7 @@ namespace Complejidad.Components
     public class IdComponent : MonoBehaviour
     {
         [SerializeField]
-        private TMP_Text idText;
+        private TMP_Text idText = null;
 
         public void ChangeIdText(string id)
         {
