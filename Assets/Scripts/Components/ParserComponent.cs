@@ -34,11 +34,15 @@ namespace Complejidad.Components
                 string id = properties[0];
                 float width = float.Parse(properties[1]);
                 float height = float.Parse(properties[2]);
-                storeRectanglesComponent.Rectangles.Add(new Models.Rectangle
+                int instances = int.Parse(properties[3]);
+                for (int j = 0; j < instances; ++j)
                 {
-                    id = id,
-                    area = new Rect(0, 0, width, height)
-                });
+                    storeRectanglesComponent.Rectangles.Add(new Models.Rectangle
+                    {
+                        id = id,
+                        area = new Rect(0, 0, width, height)
+                    });
+                }
             }
         }
     }
