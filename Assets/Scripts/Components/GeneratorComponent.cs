@@ -34,15 +34,12 @@ namespace Complejidad.Components
                 }
 
                 formats.Add(newFormat);
-
-                //Console.WriteLine($"{format} {formatWidth} {formatHeight} {formatCount}");
-
                 format = GetNextString(format);
             }
 
-            using (StreamWriter file = new StreamWriter("input_file.txt"))
+            using (StreamWriter file = new StreamWriter(@"Assets\input.txt"))
             {
-                file.WriteLine($"{width}, {height}");
+                file.WriteLine($"{width} {height}");
                 file.WriteLine($"{formatSize}");
 
                 foreach (Models.Format item in formats)
