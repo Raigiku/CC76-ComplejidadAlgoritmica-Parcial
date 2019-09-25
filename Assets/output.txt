@@ -1,0 +1,75 @@
+Planchas: 19 plancha(s) utilizada(s) 
+Desperdicio: 32,67824%, Area: 6208865 metros cuadrados
+Cortes 7
+Plancha 1
+A1 0 0 N
+A2 166 0 N
+A3 332 0 N
+A4 498 0 N
+A5 664 0 N
+A6 830 0 N
+C2 0 922 N
+C3 413 922 N
+Plancha 2
+F5 0 0 N
+B1 822 0 N
+C4 0 734 N
+C5 413 734 N
+C1 0 796 N
+C6 413 796 N
+C7 0 858 N
+C8 413 858 N
+C9 0 920 N
+I3 413 920 N
+I4 594 920 N
+I5 775 920 N
+Plancha 3
+F4 0 0 N
+B2 822 0 N
+I1 0 734 N
+I2 181 734 N
+Plancha 4
+F3 0 0 N
+B3 822 0 N
+Plancha 5
+F1 0 0 N
+B4 822 0 N
+Plancha 6
+F2 0 0 N
+B5 822 0 N
+Plancha 7
+H1 0 0 N
+Plancha 8
+H2 0 0 N
+Plancha 9
+H8 0 0 N
+Plancha 10
+H7 0 0 N
+Plancha 11
+H6 0 0 N
+Plancha 12
+H5 0 0 N
+Plancha 13
+H3 0 0 N
+Plancha 14
+H4 0 0 N
+Plancha 15
+D2 0 0 N
+D1 178 0 N
+D3 356 0 N
+G2 0 531 N
+Plancha 16
+J5 0 0 N
+J1 487 0 N
+J2 0 470 N
+J3 487 470 N
+Plancha 17
+J4 0 0 N
+J6 487 0 N
+G3 0 470 N
+Plancha 18
+G1 0 0 N
+G4 0 385 N
+Plancha 19
+E2 0 0 N
+E1 0 359 N
