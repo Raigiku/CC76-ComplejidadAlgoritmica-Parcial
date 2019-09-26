@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using TMPro;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
@@ -15,35 +16,31 @@ namespace Complejidad.Components
 
         private StoreBoardsComponent storeBoardsComponent;
 
+        [SerializeField]
+        private TMP_Text totalBoardsTxt;
+        
+        [SerializeField]
+        private TMP_Text areaWasteTxt;
+
         private void Awake()
         {
             storeBoardsComponent = GetComponent<StoreBoardsComponent>();
         }
 
-        public void ReadFiles()
-        {
-            ClearEntities();
-            ReadInput();
-            ReadOutput();
-        }
-
-        private void ClearEntities()
+        public void ClearEntities()
         {
             formats = new Dictionary<string, Models.Format>();
-            storeBoardsComponent.Boards.ForEach(
-                boardGameObject => Destroy(boardGameObject)
-            );
-            storeBoardsComponent.Boards.Clear();
+            storeBoardsComponent.Clear();
         }
 
-        private void ReadInput()
+        public void ReadInput()
         {
             var input_lines = System.IO.File.ReadAllLines(@"Assets\input.txt");
             ParseInputGrid(input_lines[0].Split(' '));
             ParseInputFormats(input_lines);
         }
 
-        private void ReadOutput()
+        public void ReadOutput()
         {
             string[] output_lines = System.IO.File.ReadAllLines(@"Assets\output.txt");
             ParseOutputRectangles(output_lines);
@@ -71,7 +68,7 @@ namespace Complejidad.Components
                     Id = id,
                     Width = width,
                     Height = height,
-                    Count = count
+                    Quantity = count
                 };
             }
         }
@@ -79,6 +76,8 @@ namespace Complejidad.Components
         private void ParseOutputRectangles(string[] output_lines)
         {
             GameObject board = null;
+            totalBoardsTxt.text = output_lines[0];
+            areaWasteTxt.text = output_lines[1];
             for (int i = 3; i < output_lines.Length; ++i)
             {
                 string[] words = output_lines[i].Split(' ');
@@ -124,7 +123,7 @@ namespace Complejidad.Components
                     storeRectanglesComponent.CreateRectangle(rectangle);
                 }
             }
-            if (storeBoardsComponent.Boards.Count > 1)
+            if (storeBoardsComponent.Boards.Count > 0)
                 storeBoardsComponent.Boards[0].SetActive(true);
         }
     }

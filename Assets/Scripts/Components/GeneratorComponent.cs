@@ -7,25 +7,26 @@ namespace Complejidad.Components
 {
     public class GeneratorComponent : MonoBehaviour
     {
-        private List<Models.Format> formats = new List<Models.Format>();
+        private List<Models.Format> formats;
 
         public void GenerateFile()
         {
-            const int maxSize = 1001;
+            formats = new List<Models.Format>();
+            System.Random random = new System.Random();
+            int width = random.Next(1, 1001);
+            int height = random.Next(1, 1001);
+            int formatsNumber = random.Next(1, 101);
+            int unitsNumber = random.Next(1, 101);
+            int formatWidth, formatHeight, formatCount;
             string format = "A";
-
-            int width = Random.Range(1, maxSize);
-            int height = Random.Range(1, maxSize);
-            int formatSize = Random.Range(1, maxSize);
-
-            for (int i = 0; i < formatSize; i++)
+            for (int i = 0; i < formatsNumber; i++)
             {
-                int formatWidth = Random.Range(1, width + 1);
-                int formatHeight = Random.Range(1, height + 1);
-                int formatCount = Random.Range(1, 10);
+                formatWidth = random.Next(1, width + 1);
+                formatHeight = random.Next(1, height + 1);
+                formatCount = random.Next(1, unitsNumber);
 
                 Models.Format newFormat = new Models.Format()
-                { Id = format, Width = formatWidth, Height = formatHeight, Count = formatCount };
+                { Id = format, Width = formatWidth, Height = formatHeight, Quantity = formatCount };
 
                 if (IsFormatUsed(newFormat))
                 {
@@ -40,11 +41,11 @@ namespace Complejidad.Components
             using (StreamWriter file = new StreamWriter(@"Assets\input.txt"))
             {
                 file.WriteLine($"{width} {height}");
-                file.WriteLine($"{formatSize}");
+                file.WriteLine($"{formatsNumber}");
 
-                foreach (Models.Format item in formats)
+                foreach (var item in formats)
                 {
-                    file.WriteLine($"{item.Id} {item.Width} {item.Height} {item.Count}");
+                    file.WriteLine($"{item.Id} {item.Width} {item.Height} {item.Quantity}");
                 }
             }
         }

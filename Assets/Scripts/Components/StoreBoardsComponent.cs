@@ -30,5 +30,20 @@ namespace Complejidad.Components
                 activeBoardTxt.text = "Plancha: " + (activeBoard + 1).ToString();
             }
         }
+
+        public void Clear()
+        {
+            if (Boards.Count > 0)
+            {
+                Boards[activeBoard].SetActive(false);
+                activeBoard = 0;
+                Boards[activeBoard].SetActive(true);
+                activeBoardTxt.text = "Plancha: 1";
+                Boards.ForEach(
+                    boardGameObject => Destroy(boardGameObject)
+                );
+                Boards.Clear();
+            }
+        }
     }
 }
