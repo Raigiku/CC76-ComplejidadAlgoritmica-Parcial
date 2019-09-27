@@ -2,8 +2,6 @@
 
 ![alt text](Assets/Sprites/algorithm-icon.png)
 
-Manual
-
 Descargar la versión 1.0 de la sección Releases (versión de Linux y Mac OS X no probadas).
 
 Para el ingreso de input manual, modificar el archivo "Assets/input.txt".
