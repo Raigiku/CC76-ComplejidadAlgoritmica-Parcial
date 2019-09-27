@@ -17,10 +17,10 @@ namespace Complejidad.Components
         private StoreBoardsComponent storeBoardsComponent;
 
         [SerializeField]
-        private TMP_Text totalBoardsTxt;
+        private TMP_Text totalBoardsTxt = null;
         
         [SerializeField]
-        private TMP_Text areaWasteTxt;
+        private TMP_Text areaWasteTxt = null;
 
         private void Awake()
         {

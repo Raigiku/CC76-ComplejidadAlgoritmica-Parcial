@@ -51,22 +51,32 @@ namespace Complejidad.Models.Solution2
             }
 
             List<Box> boxes = FormatConverter.FormatToBox(formats);
-            boxes.Sort((a, b) => b.Height.CompareTo(a.Height));
-            // ----------------------------------------
+
             Stopwatch stopWatch = new Stopwatch();
             stopWatch.Start();
             var initialMemory = GC.GetTotalMemory(false);
 
+            boxes.Sort((a, b) => {
+                if (a.Width > a.Height) {
+                    (a.Width, a.Height) = (a.Height, a.Width);
+                    a.IsRotated = true;
+                }
+                if (b.Width > b.Height) {
+                    (b.Width, b.Height) = (b.Height, b.Width);
+                    b.IsRotated = true;
+                }
+                return b.Height.CompareTo(a.Height);
+            });
             List<List<Box>> levelBoxes = packer.InsertBoxes(boxes);
-            Tuple<float, float> unusedArea = packer.GetUnusedPercentageAndArea(boxes);
 
             var finalMemory = GC.GetTotalMemory(false);
             stopWatch.Stop();
             TimeSpan timeElapsedSpan = stopWatch.Elapsed;
+            
             TimeElapsed = timeElapsedSpan.TotalSeconds.ToString();
-
             MemoryUsed = ((finalMemory - initialMemory) / 1_024).ToString();
-            // ----------------------------------------
+
+            Tuple<float, float> unusedArea = packer.GetUnusedPercentageAndArea(boxes);
             Printer.PrintFile(width, height, levelBoxes, unusedArea);
         }
     }

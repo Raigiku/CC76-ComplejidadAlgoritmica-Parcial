@@ -13,8 +13,8 @@ namespace Complejidad.Components
         {
             formats = new List<Models.Format>();
             System.Random random = new System.Random();
-            int width = random.Next(1, 1001);
-            int height = random.Next(1, 1001);
+            int width = random.Next(1, 101);
+            int height = random.Next(1, 101);
             int formatsNumber = random.Next(1, 101);
             int unitsNumber = random.Next(1, 101);
             int formatWidth, formatHeight, formatCount;

@@ -19,10 +19,8 @@
 
         public void Rotate()
         {
-            int temp = Width;
-            Width = Height;
-            Height = temp;
-            IsRotated = true;
+            (Width, Height) = (Height, Width);
+            IsRotated = !IsRotated;
         }
 
         public override string ToString()

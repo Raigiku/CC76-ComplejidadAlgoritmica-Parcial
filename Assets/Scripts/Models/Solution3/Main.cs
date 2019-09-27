@@ -1,4 +1,7 @@
-﻿namespace Complejidad.Models.Solution3
+﻿using System;
+using System.Diagnostics;
+
+namespace Complejidad.Models.Solution3
 {
     public class Main : Complejidad.Models.Algorithm
     {
@@ -17,10 +20,22 @@
                 var width = int.Parse(properties[1]);
                 var height = int.Parse(properties[2]);
                 var count = int.Parse(properties[3]);
-                Piece p = new Piece(id, height, width, count);
+                Piece p = new Piece(id, width, height, count);
                 a.Pieces.Add(p);
             }
+
+            Stopwatch stopWatch = new Stopwatch();
+            stopWatch.Start();
+            var initialMemory = GC.GetTotalMemory(false);
+            
             a.a();
+
+            var finalMemory = GC.GetTotalMemory(false);
+            stopWatch.Stop();
+            TimeSpan timeElapsedSpan = stopWatch.Elapsed;
+
+            TimeElapsed = timeElapsedSpan.TotalSeconds.ToString();
+            MemoryUsed = ((finalMemory - initialMemory) / 1_024).ToString();
         }
     }
 }

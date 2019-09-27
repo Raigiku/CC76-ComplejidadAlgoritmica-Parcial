@@ -46,7 +46,6 @@ namespace Complejidad.Models.Solution2
             }
 
             // Crear otro tablero
-
             Solution2.Board newBoard = new Solution2.Board(Width, Height);
             newBoard.Insert(box);
             box.Level = Boards.Count;

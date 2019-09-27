@@ -52,21 +52,21 @@ namespace Complejidad.Models.Solution1
 
 
             List<Box> boxes = FormatConverter.FormatToBox(formats);
-            // --------------------------------------
+
             var stopWatch = new Stopwatch();
             stopWatch.Start();
             var initialMemory = GC.GetTotalMemory(false);
 
             List<List<Box>> levelBoxes = packer.Insert(boxes);
-            Tuple<float, float> unusedArea = packer.GetUnusedPercentageAndArea();
 
             var finalMemory = GC.GetTotalMemory(false);
             stopWatch.Stop();
             TimeSpan timeElapsedSpan = stopWatch.Elapsed;
+            
             TimeElapsed = timeElapsedSpan.TotalSeconds.ToString();
-
             MemoryUsed = ((finalMemory - initialMemory) / 1_024).ToString();
-            // --------------------------------------
+
+            Tuple<float, float> unusedArea = packer.GetUnusedPercentageAndArea();
             Printer.PrintFile(width, height, levelBoxes, unusedArea);
         }
     }

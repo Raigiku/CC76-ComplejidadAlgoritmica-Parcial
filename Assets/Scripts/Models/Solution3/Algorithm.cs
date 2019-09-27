@@ -32,7 +32,7 @@ namespace Complejidad.Models.Solution3
         public int H { get; set; }
         public int W { get; set; }
         public int Table { get; set; }
-        public int Area { get; set; }
+        public ulong Area { get; set; }
         public float Waste { get; set; }
         List<int> hojas;
         List<Tuple<string, int, int, string>> resp;
@@ -51,9 +51,9 @@ namespace Complejidad.Models.Solution3
         {
             using (System.IO.StreamWriter file = new System.IO.StreamWriter(@"Assets\output.txt"))
             {
-                file.WriteLine("Planchas: " + Table.ToString() + " Planchas Utilizadas");
-                file.WriteLine("Desperdicio: " + Waste + "%, Area: " + Area + " metros cuadrados ");
-                file.WriteLine("Cortes: algoritmo de empaquetamiento");
+                file.WriteLine("Planchas: " + Table.ToString() + " plancha(s) utilizada(s)");
+                file.WriteLine("Desperdicio: " + Waste * 100 + "%, Area: " + Area + " metros cuadrados ");
+                file.WriteLine("no hay cortes");
                 for (int j = 0; j < respT.Count(); ++j)
                 {
                     file.WriteLine("Plancha " + (j + 1));
@@ -72,6 +72,8 @@ namespace Complejidad.Models.Solution3
             Pieces.Sort(new GFG());
             while (!BBF())
             {
+
+
                 if (resp.Count() == 0)
                     break;
 
@@ -85,12 +87,11 @@ namespace Complejidad.Models.Solution3
 
                 Table += 1;
             }
-            Area += areaDespercidiada();
-            Waste = Area * 100;
-            Waste /= (H * W * Table);
-            /*Waste = H * W ;
-            Waste /= ;
-            Waste *= Table*100;*/
+            Area = areaDespercidiada();
+            Waste = Area;
+            Waste /= (H * W);
+            Waste /= Table;
+
             imp();
             return Table;
         }
@@ -122,6 +123,7 @@ namespace Complejidad.Models.Solution3
                     if (inf)
                     {
                         refenceLine = H;
+                        //refenceLine = Pieces[index].H + hojas[gap.Item1];
                         inf = false;
                     }
 
@@ -139,13 +141,7 @@ namespace Complejidad.Models.Solution3
                         int menor = Math.Min((gap.Item1 - 1 >= 0) ? (hojas[gap.Item1 - 1] - hojas[gap.Item1]) : H, (gap.Item2 + gap.Item1 < W) ? (hojas[gap.Item2 + gap.Item1] - hojas[gap.Item2 + gap.Item1 - 1]) : H);
 
                         FillSheets(menor, gap.Item1, gap.Item2);
-                        if (esp + menor * gap.Item2 > H * W)
-                            Area = H * W - esp;
-                        else
-                        {
 
-                            Area += esp + menor * gap.Item2;
-                        }
                         esp += menor * gap.Item2;
                     }
                     else
@@ -168,6 +164,7 @@ namespace Complejidad.Models.Solution3
         Tuple<int, int> FindLowestGap(int init)
         {
             int index = -1, w = 0, min = W;
+            bool inte = false;
             for (int i = init; i < W; ++i)
             {
                 if (hojas[i] < min)
@@ -175,11 +172,16 @@ namespace Complejidad.Models.Solution3
                     min = hojas[i];
                     index = i;
                     w = 1;
+                    inte = false;
                 }
                 else
                 {
-                    if (hojas[i] == min)
+                    if (hojas[i] == min && min != W && !inte)
                         w++;
+                    else
+                    {
+                        inte = true;
+                    }
                 }
 
             }
@@ -248,14 +250,16 @@ namespace Complejidad.Models.Solution3
 
         }
 
-        int areaDespercidiada()
+        ulong areaDespercidiada()
         {
-            int cont = 0;
-            for (int i = 0; i < this.W; ++i)
+            ulong A = (ulong)(W * H);
+            A *= (ulong)(Table);
+            for (int i = 0; i < Pieces.Count(); ++i)
             {
-                cont += (this.H - hojas[i]);
+                A -= (ulong)(Pieces[i].Quant * Pieces[i].H * Pieces[i].W);
             }
-            return cont;
+
+            return A;
         }
 
     }

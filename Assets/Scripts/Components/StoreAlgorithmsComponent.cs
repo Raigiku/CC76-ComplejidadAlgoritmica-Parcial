@@ -15,10 +15,10 @@ namespace Complejidad.Components
         public List<Models.Algorithm> Algorithms { get; set; }
 
         [SerializeField]
-        private TMP_Text usedMemoryTxt;
+        private TMP_Text usedMemoryTxt = null;
 
         [SerializeField]
-        private TMP_Text elapsedTimeTxt;
+        private TMP_Text elapsedTimeTxt = null;
 
         private void Awake()
         {
@@ -26,15 +26,19 @@ namespace Complejidad.Components
             Algorithms = new List<Models.Algorithm>();
             Algorithms.Add(new Models.Solution1.Main
             {
-                Name = "Binary Tree Packing"
+                Name = "Binary Tree Bin Packing"
             });
             Algorithms.Add(new Models.Solution2.Main
             {
-                Name = "1st Fit Deacreasing Height"
+                Name = "First Fit Decreasing Height Bin Packing"
             });
             Algorithms.Add(new Models.Solution3.Main
             {
-                Name = "Best Fit Heuristic"
+                Name = "Bricklaying Best Fit Bin Packing"
+            });
+            Algorithms.Add(new Models.Optimal.Main
+            {
+                Name = "Solución Óptima"
             });
         }
 

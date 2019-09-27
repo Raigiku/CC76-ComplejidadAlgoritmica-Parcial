@@ -2,20 +2,21 @@
 {
     class Piece
     {
-        public Piece(string Id, int H, int W, int Quant)
+        public Piece(string Id, int W, int H, int Quant)
         {
+            //Console.WriteLine("hola");
             this.Id = Id;
             if (H > W)
             {
                 this.H = W;
                 this.W = H;
-                Normal = "N";
+                Normal = "G";
             }
             else
             {
                 this.H = H;
                 this.W = W;
-                Normal = "G";
+                Normal = "N";
             }
 
             this.Quant = Quant;
