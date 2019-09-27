@@ -1,6 +1,8 @@
 # WV72-CC76-ComplejidadAlgoritmica-Parcial
 
-![alt text](Assets/Sprites/algorithm-icon.png)
+<p align="center">
+  <img src="Assets/Sprites/algorithm-icon.png">
+</p>
 
 Descargar la versión 1.0 de la sección Releases (versión de Linux y Mac OS X no probadas).
 
